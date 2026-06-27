@@ -311,7 +311,7 @@ app.get("/dashboard/:userId", (req, res) => {
 
 });
 
-
-app.listen(5000,()=>{
+const port = process.env.port || 5000;
+app.listen(port,()=>{
     console.log("Server running on port 5000");
 });
