@@ -1,8 +1,19 @@
+// ===============================
+// API URL
+// ===============================
+const API_URL =
+    window.location.hostname === "localhost"
+        ? "http://localhost:5000"
+        : window.location.origin;
 
+// ===============================
 // Logged-in User ID
+// ===============================
 const userId = localStorage.getItem("userId");
 
+// ===============================
 // Form Elements
+// ===============================
 const fullName = document.getElementById("fullName");
 const dob = document.getElementById("dob");
 const bloodGroup = document.getElementById("bloodGroup");
@@ -15,21 +26,17 @@ const accountNumber = document.getElementById("accountNumber");
 const voterId = document.getElementById("voterId");
 const drivingLicence = document.getElementById("drivingLicence");
 
-// Load Dashboard Data
-window.onload = loadDashboard;
-
 const form = document.getElementById("dashboardForm");
 const saveStatus = document.getElementById("saveStatus");
 
-let saveTimeout;
-form.addEventListener("input",()=>{
-    saveStatus.textContent = "Saving....";
-    clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(()=>{
-        saveDashboard();
-    },1000);
-})
+// ===============================
+// Load Dashboard on Page Load
+// ===============================
+window.onload = loadDashboard;
 
+// ===============================
+// Load Dashboard Data
+// ===============================
 async function loadDashboard() {
 
     if (!userId) {
@@ -40,20 +47,20 @@ async function loadDashboard() {
 
     try {
 
-        const response = await fetch(
-            `http://localhost:5000/dashboard/${userId}`
-        );
+        const response = await fetch(`${API_URL}/dashboard/${userId}`);
 
-        if (!response.ok) return;
+        if (!response.ok) {
+            return;
+        }
 
         const data = await response.json();
 
-        // Fill Form
         fullName.value = data.fullName || "";
         dob.value = data.dob || "";
         bloodGroup.value = data.bloodGroup || "";
         permanentAddress.value = data.permanentAddress || "";
         pinCode.value = data.pinCode || "";
+
         aadhaarNumber.value = data.aadhaarNumber || "";
         panNumber.value = data.panNumber || "";
         accountNumber.value = data.bankAccountNumber || "";
@@ -62,22 +69,39 @@ async function loadDashboard() {
 
     } catch (error) {
 
-        console.log("Error:", error);
+        console.error("Load Error:", error);
 
     }
+
 }
 
-/* ===================================
-   SAVE DASHBOARD DATA
-=================================== */
+// ===============================
+// Auto Save
+// ===============================
+let saveTimeout;
 
+form.addEventListener("input", () => {
 
+    saveStatus.textContent = "Saving...";
 
+    clearTimeout(saveTimeout);
+
+    saveTimeout = setTimeout(() => {
+
+        saveDashboard();
+
+    }, 1000);
+
+});
+
+// ===============================
+// Save Dashboard Data
+// ===============================
 async function saveDashboard() {
 
     const dashboardData = {
 
-        userId: userId,
+        userId,
 
         fullName: fullName.value,
         dob: dob.value,
@@ -95,31 +119,34 @@ async function saveDashboard() {
 
     try {
 
-        const response = await fetch(
-            "http://localhost:5000/dashboard",
-            {
+        const response = await fetch(`${API_URL}/dashboard`, {
 
-                method: "POST",
+            method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-                body: JSON.stringify(dashboardData)
+            body: JSON.stringify(dashboardData)
 
-            }
-        );
+        });
 
         const data = await response.json();
 
         if (response.ok) {
+
             saveStatus.textContent = "All changes saved";
+
+        } else {
+
+            saveStatus.textContent = data.message;
+
         }
 
     } catch (error) {
 
-        console.log(error);
-        alert("Unable to save data.");
+        console.error("Save Error:", error);
+        saveStatus.textContent = "Unable to save data.";
 
     }
 
