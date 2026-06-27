@@ -1,0 +1,194 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#333;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 10%;
+    background:#0f172a;
+    color:white;
+}
+
+.nav-buttons button,
+.hero-buttons button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-left:10px;
+}
+
+.nav-buttons button:first-child,
+.hero-buttons button:first-child{
+    background:#f97316;
+    color:white;
+}
+
+.nav-buttons button:last-child,
+.hero-buttons button:last-child{
+    background:white;
+    color:#0f172a;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 10%;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.problem,
+.features,
+.benefits{
+    padding:60px 10%;
+}
+
+.problem h2,
+.features h2,
+.benefits h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.problem p{
+    max-width:800px;
+    margin:auto;
+    text-align:center;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#f97316;
+}
+
+.benefits ul{
+    max-width:700px;
+    margin:auto;
+}
+
+.benefits li{
+    margin:15px 0;
+    list-style:none;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#0f172a;
+    color:white;
+}
+/* Tablet */
+@media (max-width: 768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .problem,
+    .features,
+    .benefits,
+    .devices{
+        padding:40px 20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px){
+
+    .hero h1{
+        font-size:1.8rem;
+    }
+
+    .hero p{
+        font-size:0.95rem;
+    }
+
+    .nav-buttons{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        gap:10px;
+    }
+
+    .nav-buttons button{
+        width:100%;
+        margin-left:0;
+    }
+
+    .hero-buttons{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .hero-buttons button{
+        width:100%;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .problem p,
+    .benefits li{
+        font-size:0.95rem;
+    }
+
+    footer{
+        font-size:0.9rem;
+    }
+}

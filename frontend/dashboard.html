@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DataVault Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <h2>DataVault</h2>
+
+    </div>
+
+    <div class="user-area">
+
+        <span id="username">
+            Welcome, User
+        </span>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ================= DASHBOARD ================= -->
+
+<main class="dashboard">
+
+    <section class="welcome">
+
+        <h1>Welcome to DataVault</h1>
+
+        <p>
+
+            Your secure digital vault for storing important
+            personal information. Save your documents safely
+            and access them anytime from anywhere.
+
+        </p>
+
+    </section>
+
+    <!-- About -->
+
+    <section class="about">
+
+        <h2>About This Application</h2>
+
+        <p>
+
+            DataVault helps you securely store important
+            information like Aadhaar Number, PAN Card,
+            Bank Account Number, Voter ID, Driving Licence,
+            Date of Birth and other personal details.
+
+        </p>
+
+        <p>
+
+            Instead of remembering every number or carrying
+            physical documents everywhere, simply log in to
+            your account and access your information securely.
+
+        </p>
+
+    </section>
+
+    <!-- Personal Information -->
+
+    <section class="form-section">
+
+        <h2>Personal Information</h2>
+        
+        <p id="saveStatus" class="save-status">All changes saved</p>
+
+        <form id="dashboardForm">
+<!-- Row 1 -->
+
+<div class="form-row">
+
+    <div class="input-group">
+
+        <label for="fullName">Full Name</label>
+
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Enter Full Name"
+            required>
+
+    </div>
+
+    <div class="input-group">
+
+        <label for="dob">Date of Birth</label>
+
+        <input
+            type="date"
+            id="dob"
+            required>
+
+    </div>
+
+</div>
+
+<!-- Row 2 -->
+
+<div class="form-row">
+
+    <div class="input-group">
+
+        <label for="bloodGroup">Blood Group</label>
+
+        <input
+            type="text"
+            id="bloodGroup"
+            placeholder="Example: O+">
+
+    </div>
+
+    <div class="input-group">
+
+        <label for="pinCode">PIN Code</label>
+
+        <input
+            type="text"
+            id="pinCode"
+            placeholder="Enter PIN Code">
+
+    </div>
+
+</div>
+
+<!-- Permanent Address -->
+
+<div class="input-group address">
+
+    <label for="permanentAddress">
+
+        Permanent Address
+
+    </label>
+
+    <textarea
+        id="permanentAddress"
+        rows="4"
+        placeholder="Enter Permanent Address"></textarea>
+
+</div>
+
+<!-- Row 3 -->
+
+<div class="form-row">
+
+    <div class="input-group">
+
+        <label for="aadhaarNumber">
+
+            Aadhaar Number
+
+        </label>
+
+        <input
+            type="text"
+            id="aadhaarNumber"
+            maxlength="12"
+            placeholder="Enter Aadhaar Number">
+
+    </div>
+
+    <div class="input-group">
+
+        <label for="panNumber">
+
+            PAN Card Number
+
+        </label>
+
+        <input
+            type="text"
+            id="panNumber"
+            placeholder="Enter PAN Number">
+
+    </div>
+
+</div>
+
+<!-- Row 4 -->
+
+<div class="form-row">
+
+    <div class="input-group">
+
+        <label for="accountNumber">
+
+            Bank Account Number
+
+        </label>
+
+        <input
+            type="text"
+            id="accountNumber"
+            placeholder="Enter Bank Account Number">
+
+    </div>
+
+    <div class="input-group">
+
+        <label for="voterId">
+
+            Voter ID Number
+
+        </label>
+
+        <input
+            type="text"
+            id="voterId"
+            placeholder="Enter Voter ID Number">
+
+    </div>
+
+</div>
+
+<!-- Row 5 -->
+
+<div class="form-row">
+
+    <div class="input-group">
+
+        <label for="drivingLicence">
+
+            Driving Licence Number
+
+        </label>
+
+        <input
+            type="text"
+            id="drivingLicence"
+            placeholder="Enter Driving Licence Number">
+
+    </div>
+
+</div>
+        </form>
+
+    </section>
+
+   
+</main>
+
+<script>
+
+const username = localStorage.getItem("username");
+
+if (username) {
+
+    document.getElementById("username").textContent =
+        "Welcome, " + username;
+
+}
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+
+    window.location.href = "login.html";
+
+});
+
+</script>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
