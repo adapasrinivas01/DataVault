@@ -2,13 +2,31 @@ const express = require("express");
 const cors = require("cors");
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const db = new sqlite3.Database("../database/database.db");
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
+
+// SQLite Database
+const db = new sqlite3.Database(
+    path.join(__dirname, "../database/database.db"),
+    (err) => {
+        if (err) {
+            console.log("Database Error:", err.message);
+        } else {
+            console.log("Database Connected");
+        }
+    }
+);
 
 db.run(`
 CREATE TABLE IF NOT EXISTS users(
@@ -311,7 +329,8 @@ app.get("/dashboard/:userId", (req, res) => {
 
 });
 
-const port = process.env.port || 5000;
-app.listen(port,()=>{
-    console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
